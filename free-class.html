@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Class: Meet Linux | Coraxshift DevOps Academy</title>
+<meta name="description" content="A free 2-hour Linux class for complete beginners. Run your own Linux computer in your browser, with no cost and no experience needed.">
+<meta property="og:title" content="Free Class: Meet Linux | Coraxshift DevOps Academy">
+<meta property="og:description" content="A free 2-hour Linux class for complete beginners. No cost, no experience needed.">
+<meta property="og:url" content="https://coraxshift-academy.github.io/free-class.html">
+<meta name="theme-color" content="#10172b">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐦‍⬛</text></svg>">
+<style>
+    :root {
+      --ink: #10172b; --ink-2: #1a2340; --ink-3: #26315a;
+      --paper: #fffdf8; --muted: #b7bfd6; --lime: #d7ed62; --lime-dark: #b9d13f;
+      --radius: 14px; --max: 1120px;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--ink); color: var(--paper); line-height: 1.6; }
+    a { color: inherit; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+    /* Nav */
+    header { position: sticky; top: 0; z-index: 10; background: rgba(16,23,43,.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--ink-3); }
+    nav { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+    .logo { font-weight: 800; font-size: 1.15rem; text-decoration: none; letter-spacing: -.01em; }
+    .logo span { color: var(--lime); }
+    .nav-links { display: flex; gap: 26px; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: .95rem; }
+    .nav-links a:hover { color: var(--paper); }
+    .btn { display: inline-block; padding: 12px 22px; border-radius: 10px; font-weight: 700; text-decoration: none; transition: transform .15s, background .15s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--lime); color: var(--ink) !important; }
+    .btn-primary:hover { background: var(--lime-dark); }
+    .btn-ghost { border: 1px solid var(--ink-3); color: var(--paper); }
+    .btn-ghost:hover { border-color: var(--lime); }
+    .nav-links .btn { padding: 9px 16px; }
+    @media (max-width: 760px) { .nav-links a:not(.btn) { display: none; } }
+
+    /* Hero */
+    .hero { padding: 96px 0 80px; text-align: center; background: radial-gradient(ellipse at top, rgba(215,237,98,.13), transparent 60%); }
+    .eyebrow { display: inline-block; padding: 6px 14px; border-radius: 999px; background: var(--ink-2); border: 1px solid var(--ink-3); color: var(--lime); font-size: .85rem; font-weight: 600; margin-bottom: 22px; }
+    h1 { font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.08; letter-spacing: -.03em; margin: 0 0 20px; }
+    h1 em { font-style: normal; color: var(--lime); }
+    .lead { font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--muted); max-width: 660px; margin: 0 auto 34px; }
+    .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .stats { display: flex; justify-content: center; gap: 44px; flex-wrap: wrap; margin-top: 60px; color: var(--muted); }
+    .stats b { display: block; font-size: 1.9rem; color: var(--paper); }
+
+    /* Sections */
+    section { padding: 84px 0; }
+    section.alt { background: var(--ink-2); }
+    .section-head { text-align: center; max-width: 680px; margin: 0 auto 48px; }
+    .section-head h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); letter-spacing: -.02em; margin: 0 0 12px; }
+    .section-head p { color: var(--muted); margin: 0; font-size: 1.08rem; }
+    .kicker { color: var(--lime); font-weight: 700; text-transform: uppercase; letter-spacing: .1em; font-size: .8rem; }
+
+    .grid { display: grid; gap: 20px; }
+    .g3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .g4 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card { background: var(--ink); border: 1px solid var(--ink-3); border-radius: var(--radius); padding: 26px; transition: border-color .2s, transform .2s; }
+    section:not(.alt) .card { background: var(--ink-2); }
+    .card:hover { border-color: var(--lime); transform: translateY(-3px); }
+    .card h3 { margin: 10px 0 8px; font-size: 1.15rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .97rem; }
+    .icon { font-size: 1.8rem; }
+
+    .week { display: flex; flex-direction: column; }
+    .week .num { font-family: ui-monospace, monospace; color: var(--lime); font-size: .8rem; font-weight: 700; letter-spacing: .08em; }
+    .week .topic { color: var(--paper); opacity: .7; font-size: .88rem; margin-top: -4px; margin-bottom: 8px; }
+
+    .steps { counter-reset: step; }
+    .step { position: relative; padding-left: 64px; }
+    .step::before { counter-increment: step; content: counter(step); position: absolute; left: 22px; top: 24px; width: 30px; height: 30px; border-radius: 50%; background: var(--lime); color: var(--ink); font-weight: 800; display: grid; place-items: center; }
+
+    .quote { max-width: 780px; margin: 0 auto; text-align: center; font-size: clamp(1.2rem, 2.6vw, 1.6rem); line-height: 1.5; }
+    .quote strong { color: var(--lime); }
+
+    .mv { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 44px; }
+
+    .final { text-align: center; background: linear-gradient(135deg, var(--ink-2), var(--ink-3)); border-radius: 22px; padding: 64px 26px; border: 1px solid var(--ink-3); }
+    .final h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0 0 14px; letter-spacing: -.02em; }
+    .final p { color: var(--muted); max-width: 560px; margin: 0 auto 30px; }
+    .socials { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+    footer { border-top: 1px solid var(--ink-3); padding: 34px 0; color: var(--muted); font-size: .92rem; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    footer a { text-decoration: none; margin-left: 16px; }
+    footer a:hover { color: var(--lime); }
+  
+.prose{max-width:780px;margin:0 auto}.prose h2{font-size:1.6rem;margin:2.4rem 0 .6rem;letter-spacing:-.01em}
+.prose p,.prose li{color:#e6e9f5;font-size:1.05rem}.prose ul,.prose ol{padding-left:1.3rem}
+.prose pre{background:#0a0f1e;border:1px solid var(--ink-3);border-left:4px solid var(--lime);border-radius:10px;padding:16px;overflow-x:auto}
+.prose code{font-family:Consolas,Menlo,monospace;font-size:.93rem}.prose p code,.prose li code{background:#0a0f1e;padding:2px 6px;border-radius:5px;color:var(--lime)}
+.prose blockquote{border-left:4px solid var(--lime);background:var(--ink-2);margin:1.2rem 0;padding:6px 18px;border-radius:0 10px 10px 0}
+.prose img{max-width:100%;border-radius:10px;border:1px solid var(--ink-3)}
+.prose table{border-collapse:collapse;width:100%}.prose th,.prose td{border:1px solid var(--ink-3);padding:8px 12px;text-align:left}
+.tag{display:inline-block;background:var(--lime);color:var(--ink);font-weight:800;border-radius:999px;padding:4px 14px;font-size:.85rem}
+.cta{background:var(--ink-2);border:1px solid var(--lime);border-radius:var(--radius);padding:34px;text-align:center;margin:3rem auto;max-width:780px}
+.cta h2{margin-top:0}.page-top{padding:56px 0 8px}section{padding:40px 0}
+</style></head><body>
+<header><nav class="wrap" aria-label="Main"><a class="logo" href="./">Coraxshift<span>.</span>DevOps Academy</a>
+<div class="nav-links"><a href="./#path">Learning path</a><a class="btn btn-primary" href="https://forms.gle/vLZrpkL68evBRUzw7" target="_blank" rel="noopener">Join the waitlist</a></div></nav></header>
+<main>
+<section class="page-top"><div class="wrap prose">
+<span class="tag">FREE CLASS</span>
+<h1 style="font-size:2.6rem;line-height:1.15;margin:.5rem 0">Meet Linux: your first class</h1>
+<p class="lead" style="font-size:1.2rem;color:var(--muted)">About 2 hours. No cost, no experience and no powerful laptop. You will run a real Linux computer in your browser and take your first steps on it.</p>
+<p>This is Class 1 of <b>Linux for Beginners</b>, part of the Coraxshift DevOps Academy. Do it at your own pace. If you enjoy it, the waitlist link at the bottom is how you join the full course.</p>
+</div></section>
+<section><div class="wrap prose"><h2 id="welcome-to-your-first-class">👋 Welcome to your first class</h2>
+<p>Today you will open a real Linux computer in your browser, ask it who and where you are, check its health, and create your first files. By the end of this class the terminal will feel less like a mystery and more like a conversation.</p>
+<p><strong>By the end of this class you can:</strong></p>
+<ul>
+<li>Open your terminal and recognise the prompt</li>
+<li>Check your Linux version, username, folder and computer name</li>
+<li>Check memory, disk and uptime</li>
+<li>Move between folders and create, copy, move and delete files</li>
+<li>Explain the main Linux folders (<code>/</code>, <code>/home</code>, <code>/etc</code>, <code>/var</code>, <code>/tmp</code>)</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>A free GitHub account (<a href="https://github.com/signup">create one here</a>)</li>
+<li>A free blank Codespace: go to <a href="https://github.com/codespaces/new">github.com/codespaces/new</a>, choose the <strong>Blank</strong> template, and click <strong>Create codespace</strong>. Wait a minute or two for the editor to open in your browser.</li>
+<li>Nothing else. No Linux experience needed.</li>
+</ul>
+<h2 id="how-every-step-works">How every step works</h2>
+<p>Each step follows the same five parts, so you always know what is coming:</p>
+<ol>
+<li><strong>Why this matters</strong>: one sentence and an everyday comparison</li>
+<li><strong>Run it</strong>: commands to copy into the terminal (use the copy button on each box)</li>
+<li><strong>What each command does</strong></li>
+<li><strong>What you should see</strong>: real output from our test lab, trimmed</li>
+<li><strong>If yours looks different</strong>: the most likely reason and the fix</li>
+</ol>
+<blockquote>
+<p>💡 <strong>Your output will never match ours character for character.</strong> Times, sizes, names and numbers change from computer to computer. Compare the <em>meaning</em>, not every letter.</p>
+</blockquote>
+<h2 id="step-0-open-your-terminal-and-go-home-base">Step 0: Open your terminal and go "home base"</h2>
+<p><strong>Why this matters:</strong> every class starts from the same folder, so the commands work the same for everyone. Think of it as the classroom door: we all walk in through it.</p>
+<p>In your Codespace, open the terminal (menu <strong>☰ → Terminal → New Terminal</strong>, or press <strong>Ctrl + `</strong>). You will see a <strong>prompt</strong>, the line waiting for you to type. It looks something like this:</p>
+<pre><code class="language-text">@your-github-name ➜ ~ $
+</code></pre>
+<p><strong>Run it:</strong></p>
+<pre><code class="language-bash">cd ~
+</code></pre>
+<p><strong>What it does:</strong> <code>cd</code> means <em>change directory</em>. The <code>~</code> sign means your own home folder, so this moves you home. Directory is just another word for folder.</p>
+<p><strong>What you should see:</strong> nothing at all. In Linux, <strong>no message usually means success</strong>.</p>
+<p><strong>If yours looks different:</strong> the prompt may show a folder name instead of <code>~</code>. That is fine. You are home either way.</p>
+<h2 id="step-1-ask-linux-who-and-where-you-are">Step 1: Ask Linux who and where you are</h2>
+<p><strong>Why this matters:</strong> before you change anything on a server, you check which machine you are on and who you are logged in as. It's like checking the house number before you put your key in the door.</p>
+<p><strong>Run it:</strong></p>
+<pre><code class="language-bash">cat /etc/os-release
+whoami
+pwd
+hostname
+</code></pre>
+<p><strong>What each command does:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cat /etc/os-release</code></td>
+<td>Prints the file that describes your Linux version. <code>cat</code> shows a file's contents.</td>
+</tr>
+<tr>
+<td><code>whoami</code></td>
+<td>Prints your username</td>
+</tr>
+<tr>
+<td><code>pwd</code></td>
+<td>Prints your current folder (<em>print working directory</em>)</td>
+</tr>
+<tr>
+<td><code>hostname</code></td>
+<td>Prints the computer's name</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What you should see</strong> (trimmed):</p>
+<pre><code class="language-text">PRETTY_NAME=&quot;Ubuntu 24.04.5 LTS&quot;
+NAME=&quot;Ubuntu&quot;
+VERSION_ID=&quot;24.04&quot;
+...
+codespace
+/home/codespace
+codespaces-xxxxxx
+</code></pre>
+<p><img alt="Illustrated terminal showing representative output for the four system-check commands. Hostname and patch version will differ." src="free-class-system-check.svg" /></p>
+<p><strong>If yours looks different:</strong></p>
+<ul>
+<li>A different Ubuntu patch number (for example <code>24.04.3</code>) or a different Ubuntu version is fine. Tell us (coraxshift@gmail.com) if it does not say Ubuntu at all.</li>
+<li>Your hostname will be your own Codespace's name. That's expected.</li>
+<li>If <code>pwd</code> shows a different folder, run Step 0 again.</li>
+</ul>
+<h2 id="step-2-check-your-server-s-health">Step 2: Check your server's health</h2>
+<p><strong>Why this matters:</strong> memory and disk are a server's fuel and storage. If the disk fills up to 100%, logs stop being written and apps start failing. It's like checking the fuel gauge before a long drive.</p>
+<p><strong>Run it:</strong></p>
+<pre><code class="language-bash">uptime
+free -h
+df -h /
+</code></pre>
+<p><strong>What each command does:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uptime</code></td>
+<td>How long the computer has been on, and its <em>load average</em> (how busy it has been over the last 1, 5 and 15 minutes)</td>
+</tr>
+<tr>
+<td><code>free -h</code></td>
+<td>Memory (RAM) in use and available. <code>-h</code> means <em>human-readable</em> (MB and GB instead of bytes).</td>
+</tr>
+<tr>
+<td><code>df -h /</code></td>
+<td>Disk space on the main drive. <code>/</code> means <em>the main drive</em>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What you should see:</strong></p>
+<pre><code class="language-text"> 23:16:19 up  1:02,  0 user,  load average: 0.07, 0.02, 0.00
+               total        used        free      shared  buff/cache   available
+Mem:           1.9Gi       261Mi       371Mi       1.1Mi       1.5Gi       1.7Gi
+Swap:             0B          0B          0B
+Filesystem      Size  Used Avail Use% Mounted on
+-                38G  7.8G   30G  22% /
+</code></pre>
+<p>The most useful column in <code>free -h</code> is <strong>available</strong>: memory programs can still use. The most useful column in <code>df -h /</code> is <strong>Use%</strong>.</p>
+<p><strong>If yours looks different:</strong></p>
+<ul>
+<li>Your numbers will be different (a Codespace often has 8 GB of memory or more). That's fine.</li>
+<li><code>Swap: 0B</code> is normal in a Codespace.</li>
+<li>The <code>Filesystem</code> name differs between computers (<code>overlay</code>, <code>/dev/root</code>, <code>-</code> and others are all fine).</li>
+<li>If <code>Use%</code> is above 90%, tell us (coraxshift@gmail.com) before installing anything.</li>
+</ul>
+<h2 id="step-3-move-around-and-make-folders">Step 3: Move around and make folders</h2>
+<p><strong>Why this matters:</strong> on a server you are always moving between folders: logs in one place, settings in another. <code>ls</code>, <code>cd</code> and <code>pwd</code> are your eyes, legs and map.</p>
+<p><strong>Run it</strong> one line at a time:</p>
+<pre><code class="language-bash">ls
+ls -la
+mkdir -p practice/lab
+cd practice/lab
+pwd
+cd ../..
+pwd
+</code></pre>
+<p><strong>What each command does:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ls</code></td>
+<td>Lists what is in the current folder</td>
+</tr>
+<tr>
+<td><code>ls -la</code></td>
+<td>Lists <strong>a</strong>ll files, including hidden ones that start with <code>.</code>, in <strong>l</strong>ong format (permissions, owner, size, date)</td>
+</tr>
+<tr>
+<td><code>mkdir -p practice/lab</code></td>
+<td>Makes a folder. <code>-p</code> also creates the parent folder (<code>practice</code>) if it doesn't exist, and doesn't complain if it already does.</td>
+</tr>
+<tr>
+<td><code>cd practice/lab</code></td>
+<td>Moves into the new folder</td>
+</tr>
+<tr>
+<td><code>cd ../..</code></td>
+<td>Moves up two levels. <code>..</code> always means <em>the folder above me</em>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What you should see</strong> (trimmed):</p>
+<pre><code class="language-text">GETTING-STARTED.md  README.md  modules
+total 16
+drwxr-xr-x 4 codespace codespace  128 Nov 19 23:15 .
+drwxr-xr-x 3 root      root        60 Nov 19 23:15 ..
+-rw-r--r-- 1 codespace codespace 9452 Nov 19 23:15 GETTING-STARTED.md
+-rw-r--r-- 1 codespace codespace 2062 Nov 19 23:15 README.md
+...
+/home/codespace/practice/lab
+/home/codespace
+</code></pre>
+<p><strong>If yours looks different:</strong></p>
+<ul>
+<li>You may see extra hidden entries like <code>.git</code> or <code>.github</code>. Those are normal.</li>
+<li><code>cd: practice/lab: No such file or directory</code> means <code>mkdir</code> didn't run or you were in another folder. Run Step 0, then this step again.</li>
+<li>Lost? <code>cd ~</code> always brings you back home.</li>
+</ul>
+<h2 id="step-4-tour-the-linux-file-system">Step 4: Tour the Linux file system</h2>
+<p><strong>Why this matters:</strong> every Linux server uses the same layout. Once you know it, you can find settings and logs on any server in the world, like knowing every supermarket keeps milk at the back.</p>
+<p><strong>Run it:</strong></p>
+<pre><code class="language-bash">ls /
+ls /home
+ls /var
+</code></pre>
+<p><strong>What each command does:</strong> each <code>ls</code> lists one important folder. A path starting with <code>/</code> is an <em>absolute path</em>: it starts from the very top.</p>
+<p><strong>What you should see</strong> (trimmed):</p>
+<pre><code class="language-text">bin                boot  etc   lib    media  opt   root  sbin                srv  tmp  var
+bin.usr-is-merged  dev   home  lib64  mnt    proc  run   sbin.usr-is-merged  sys  usr  workspaces
+codespace
+backups  cache  lib  local  lock  log  mail  opt  run  spool  tmp
+</code></pre>
+<p><strong>The folders that matter most:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>What lives there</th>
+<th>Analogy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/</code></td>
+<td>The root: the top of everything</td>
+<td>The front door of the building</td>
+</tr>
+<tr>
+<td><code>/home</code></td>
+<td>Users' personal folders (yours is <code>/home/codespace</code>)</td>
+<td>Each person's bedroom</td>
+</tr>
+<tr>
+<td><code>/etc</code></td>
+<td>Settings (configuration) files, for example Nginx's settings in <code>/etc/nginx</code></td>
+<td>The building's rule book</td>
+</tr>
+<tr>
+<td><code>/var</code></td>
+<td>Things that change: logs in <code>/var/log</code>, websites in <code>/var/www</code></td>
+<td>The post room and noticeboard</td>
+</tr>
+<tr>
+<td><code>/tmp</code></td>
+<td>Temporary files that may be cleared</td>
+<td>A scratch pad</td>
+</tr>
+</tbody>
+</table>
+<p><strong>If yours looks different:</strong></p>
+<ul>
+<li>A slightly different list is fine. Codespaces add their own folders.</li>
+<li>There is no <code>/var/www</code> yet. It appears in Class 2 when you install the Nginx web server.</li>
+</ul>
+<h2 id="step-5-create-read-copy-move-and-delete-a-file">Step 5: Create, read, copy, move and delete a file</h2>
+<p><strong>Why this matters:</strong> these five actions are the bread and butter of every server task, from editing a config to rotating a log.</p>
+<p><strong>Run it:</strong></p>
+<pre><code class="language-bash">echo &quot;Hello Coraxshift&quot; &gt; practice/lab/hello.txt
+cat practice/lab/hello.txt
+cp practice/lab/hello.txt practice/lab/hello-copy.txt
+mv practice/lab/hello-copy.txt practice/lab/hello-moved.txt
+ls practice/lab/
+rm practice/lab/hello-moved.txt
+ls practice/lab/
+</code></pre>
+<p><strong>What each command does:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>echo "..." &gt; file</code></td>
+<td>Writes text into a file. <code>&gt;</code> means <em>send into this file</em> and replaces what was there.</td>
+</tr>
+<tr>
+<td><code>cat file</code></td>
+<td>Shows the file's contents</td>
+</tr>
+<tr>
+<td><code>cp a b</code></td>
+<td>Copies <code>a</code> to <code>b</code></td>
+</tr>
+<tr>
+<td><code>mv a b</code></td>
+<td>Moves or renames <code>a</code> to <code>b</code></td>
+</tr>
+<tr>
+<td><code>rm file</code></td>
+<td>Deletes the file. <strong>There is no recycle bin in Linux.</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>What you should see:</strong></p>
+<pre><code class="language-text">Hello Coraxshift
+hello-moved.txt  hello.txt
+hello.txt
+</code></pre>
+<p><strong>If yours looks different:</strong></p>
+<ul>
+<li><code>No such file or directory</code>: you are probably not in the course folder. Run Step 0.</li>
+<li>Be careful with <code>rm</code>. Always read the file name twice before pressing Enter. In this course we prefer <strong>moving</strong> files aside over deleting them.</li>
+</ul>
+<h2 id="recap">✅ Recap</h2>
+<ul>
+<li>The <strong>terminal</strong> is a conversation: you type a command, Linux answers. No answer usually means success.</li>
+<li><code>whoami</code>, <code>pwd</code>, <code>hostname</code> and <code>cat /etc/os-release</code> tell you who and where you are.</li>
+<li><code>uptime</code>, <code>free -h</code> and <code>df -h /</code> are your server's health gauges.</li>
+<li><code>ls</code>, <code>cd</code>, <code>mkdir</code>, <code>cp</code>, <code>mv</code>, <code>rm</code> and <code>cat</code> are your everyday tools.</li>
+<li><code>/etc</code> holds settings, <code>/var/log</code> holds logs, <code>/home</code> holds users.</li>
+</ul></div></section>
+<section><div class="cta"><h2>🎉 That was Class 1. Want the rest?</h2>
+<p>The full <b>Linux for Beginners</b> course continues with permissions, users, processes, networking and your first script. You then deploy a real game on the web, monitor it, break it on purpose and fix it, and earn your badge. Founding members get pricing and the start date first.</p>
+<p><a class="btn btn-primary" href="https://forms.gle/vLZrpkL68evBRUzw7" target="_blank" rel="noopener">Join the founding waitlist →</a></p></div></section>
+</main>
+<footer style="padding:30px 0;border-top:1px solid var(--ink-3);text-align:center;color:var(--muted)"><div class="wrap">© 2026 Coraxshift DevOps Academy · Learn. Build. Deploy. Grow.</div></footer>
+</body></html>
